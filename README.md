@@ -1,9 +1,24 @@
-# 🐊 Saltwater Crocodile Simulator (V0.1)
+# 🐊 Saltwater Crocodile Simulator (CROCY)
 
 A realistic single-player saltwater crocodile (*Crocodylus porosus*) simulator built with Three.js, TypeScript, and Vite, deployed live on GitHub Pages.
 
-**Live Game URL:** [https://jedix420.github.io/crocy/](https://jedix420.github.io/crocy/)  
-**Repository:** [https://github.com/JEDIx420/crocy](https://github.com/JEDIx420/crocy)
+**Live Production Game:** [https://jedix420.github.io/crocy/](https://jedix420.github.io/crocy/)  
+**GitHub Repository:** [https://github.com/JEDIx420/crocy](https://github.com/JEDIx420/crocy)  
+**Development Branch:** `v0.2-living-swamp`
+
+---
+
+## 📚 Technical Documentation & System Specifications
+Comprehensive specifications have been established for the V0.2 update:
+- [📖 Game Vision & Experience Goals](file:///Users/vincyvincent/crocy/docs/GAME_VISION.md)
+- [🏗️ Technical Architecture](file:///Users/vincyvincent/crocy/docs/ARCHITECTURE.md)
+- [📦 Runtime Asset Inventory & Audit](file:///Users/vincyvincent/crocy/docs/ASSET_INVENTORY.md)
+- [🐊 Animation & Skeletal Rigging Specification](file:///Users/vincyvincent/crocy/docs/ANIMATION_SPEC.md)
+- [🌊 Water & Surface Interaction System](file:///Users/vincyvincent/crocy/docs/WATER_SYSTEM.md)
+- [🐟 Reactive Wildlife & Ecosystem AI](file:///Users/vincyvincent/crocy/docs/WILDLIFE_SYSTEM.md)
+- [🗺️ Development Roadmap & Phase Tracking](file:///Users/vincyvincent/crocy/docs/ROADMAP.md)
+- [🧪 Quality Assurance & QA Test Plan](file:///Users/vincyvincent/crocy/docs/QA_TEST_PLAN.md)
+- [📝 Project Changelog](file:///Users/vincyvincent/crocy/docs/CHANGELOG.md)
 
 ---
 
