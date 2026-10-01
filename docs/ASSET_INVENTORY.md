@@ -43,7 +43,10 @@ This inventory represents the verified audit of all runtime assets in `public/as
 
 ---
 
-## 4. Unused Reserve Assets in Repository
-- `water_buffalo/` (Water buffalo model + textures with walk animation)
-- `Ultimate Animated Animals - July 2021/` (12 rigged and animated animals: deer, wolf, cow, horse, etc.)
-- *Note:* These are reserved for future phases or expanded terrestrial ecosystems.
+## 4. Asset Tracking Status & Source Distinction
+To optimize repository clone times and stay within GitHub file size limits, assets are strictly divided between git-tracked runtime files and local source files:
+
+| Category | Assets | Location | Tracking Status |
+| :--- | :--- | :--- | :--- |
+| **Tracked Runtime Assets** | `crocodile.glb` (3.75MB), `crab.glb` (200KB), `rice_fish.glb` (1.46MB), `sleeper_fish.glb` (2.63MB), `mangrove_tree.glb` (1.05MB), `dead_tree_trunk/` (4.56MB), `fern_02/` (1.09MB), `coast_sand/` (4.63MB) | `public/assets/` | **Tracked in Git** (Deployed to GitHub Pages) |
+| **Local Source Inventory** | `crocodile_high_quality.glb` (61MB uncompressed sculpt), `cc0__red_mangrove_rhizophora_mucronata.glb` (26MB raw model), `water_buffalo/` (13MB), `Ultimate Animated Animals - July 2021/` (Blend/FBX/glTF archives) | Root / subfolders | **Local Only** (Ignored in `.gitignore` to prevent bloat; available locally for rigging/baking pipelines) |

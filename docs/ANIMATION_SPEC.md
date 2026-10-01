@@ -10,16 +10,42 @@ As verified in Phase 0 audit (`docs/ASSET_INVENTORY.md`):
 ## 2. Animation Strategy for Phase 1
 
 ### Approach A (Recommended): Programmatic Skeletal Rigging & Vertex Skinning Pipeline
-Rather than relying on manual external GUI tools, we can implement a deterministic Python script or Three.js skinning builder that:
-1. Constructs an anatomical bone hierarchy matching the crocodile's dimensions (4.8m length along Z, 1.86m width along X, 0.72m height along Y):
-   - `Root_Pelvis` (center of mass)
-   - `Spine_01`, `Spine_02`, `Neck`, `Head`, `Jaw`
-   - `Tail_01`, `Tail_02`, `Tail_03`, `Tail_04`, `Tail_Tip` (5 articulated tail joints)
-   - `Front_Leg_L` (`Shoulder`, `Elbow`, `Wrist`, `Paw`) & `Front_Leg_R`
-   - `Back_Leg_L` (`Hip`, `Knee`, `Ankle`, `Paw`) & `Back_Leg_R`
-2. Calculates bone weights (`JOINTS_0` and `WEIGHTS_0`) for each of the 13,192 vertices using bounded distance and anatomical bounding capsules.
-3. Injects the skin, joints, and inverse bind matrices into `crocodile.glb` so it becomes a standard glTF `SkinnedMesh`.
-4. Produces authentic skeletal clips or programmatic bone pose calculations driving authentic movement.
+Rather than relying on manual external GUI tools, we implement a deterministic Python pipeline that constructs an anatomical **23-bone crocodilian skeleton**:
+- **Core Spine & Head (6 bones):**
+  - `Root_Pelvis` (Center of mass / pelvic girdle)
+  - `Spine_01` (Lumbar/abdominal spine)
+  - `Spine_02` (Thoracic/chest spine)
+  - `Neck` (Cervical articulation)
+  - `Head` (Cranium & snout)
+  - `Jaw` (Lower mandible - weighted only if geometry allows believable opening without tearing)
+- **Caudal / Tail Chain (5 articulated bones for traveling sinusoidal waves):**
+  - `Tail_01` (Base of muscular tail)
+  - `Tail_02` (Upper mid-tail)
+  - `Tail_03` (Mid-tail)
+  - `Tail_04` (Lower tail)
+  - `Tail_Tip` (Flexible caudal fin/tip)
+- **Left Front Limb (3 bones):**
+  - `Shoulder_L` (Clavicle/upper arm)
+  - `Elbow_L` (Forearm)
+  - `Wrist_Paw_L` (Planted front-left manus)
+- **Right Front Limb (3 bones):**
+  - `Shoulder_R`
+  - `Elbow_R`
+  - `Wrist_Paw_R`
+- **Left Hind Limb (3 bones):**
+  - `Hip_L` (Femur / thigh)
+  - `Knee_L` (Crus / shin)
+  - `Ankle_Paw_L` (Planted rear-left pes)
+- **Right Hind Limb (3 bones):**
+  - `Hip_R`
+  - `Knee_R`
+  - `Ankle_Paw_R`
+
+Total: **23 anatomical bones**, providing full independent articulation of all four limbs, multi-segment sinusoidal tail propulsion, spine curvature, and head orientation.
+
+2. Calculates smooth, anatomically segmented skin weights (`JOINTS_0` and `WEIGHTS_0`) for all 13,192 vertices using bounded capsule line distances with distance-falloff smoothing.
+3. Injects the skin, joints, and inverse bind matrices into a separate rigged asset `crocodile_rigged.glb` (preserving the original `crocodile.glb` unrigged file as a baseline).
+4. Produces authentic skeletal clips or bone pose keyframes for validation in an inspection scene.
 
 ### Approach B: GPU Vertex Shader Deformation (Spine & Tail Undulation)
 - Feasible for spine and tail undulation in water, but does not solve individual articulated limb stepping on land.

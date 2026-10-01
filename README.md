@@ -10,15 +10,15 @@ A realistic single-player saltwater crocodile (*Crocodylus porosus*) simulator b
 
 ## 📚 Technical Documentation & System Specifications
 Comprehensive specifications have been established for the V0.2 update:
-- [📖 Game Vision & Experience Goals](file:///Users/vincyvincent/crocy/docs/GAME_VISION.md)
-- [🏗️ Technical Architecture](file:///Users/vincyvincent/crocy/docs/ARCHITECTURE.md)
-- [📦 Runtime Asset Inventory & Audit](file:///Users/vincyvincent/crocy/docs/ASSET_INVENTORY.md)
-- [🐊 Animation & Skeletal Rigging Specification](file:///Users/vincyvincent/crocy/docs/ANIMATION_SPEC.md)
-- [🌊 Water & Surface Interaction System](file:///Users/vincyvincent/crocy/docs/WATER_SYSTEM.md)
-- [🐟 Reactive Wildlife & Ecosystem AI](file:///Users/vincyvincent/crocy/docs/WILDLIFE_SYSTEM.md)
-- [🗺️ Development Roadmap & Phase Tracking](file:///Users/vincyvincent/crocy/docs/ROADMAP.md)
-- [🧪 Quality Assurance & QA Test Plan](file:///Users/vincyvincent/crocy/docs/QA_TEST_PLAN.md)
-- [📝 Project Changelog](file:///Users/vincyvincent/crocy/docs/CHANGELOG.md)
+- [📖 Game Vision & Experience Goals](docs/GAME_VISION.md)
+- [🏗️ Technical Architecture](docs/ARCHITECTURE.md)
+- [📦 Runtime Asset Inventory & Audit](docs/ASSET_INVENTORY.md)
+- [🐊 Animation & Skeletal Rigging Specification](docs/ANIMATION_SPEC.md)
+- [🌊 Water & Surface Interaction System](docs/WATER_SYSTEM.md)
+- [🐟 Reactive Wildlife & Ecosystem AI](docs/WILDLIFE_SYSTEM.md)
+- [🗺️ Development Roadmap & Phase Tracking](docs/ROADMAP.md)
+- [🧪 Quality Assurance & QA Test Plan](docs/QA_TEST_PLAN.md)
+- [📝 Project Changelog](docs/CHANGELOG.md)
 
 ---
 

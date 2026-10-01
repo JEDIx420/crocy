@@ -12,7 +12,7 @@
   - Wildlife habitat rules and bounds constraints.
 
 ### B. Automated Browser Smoke & Visual Tests (Playwright)
-- Run via: `npx tsx src/test/smoke_test.ts`
+- Run via: `npm run test:smoke` (or `npx tsx src/test/smoke_test.ts`)
 - Scope:
   - Validates full Three.js scene initialization, WebGL context, and shaders.
   - Tests Desktop viewport (`1280x720`) and Mobile Touch Landscape viewport (`844x390`).
@@ -21,7 +21,7 @@
   - Asserts zero unhandled browser exceptions (`console.error` / `pageerror`).
 
 ### C. Live Production Deployment Verification
-- Run via: `npx tsx src/test/verify_live.ts`
+- Run via: `npm run test:live` (or `npx tsx src/test/verify_live.ts`)
 - Scope:
   - Validates live GitHub Pages HTTP 200 responses.
   - Verifies asset delivery over CDN.
