@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>Saltwater Crocodile Simulator</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+      }
+
+      body, html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #0b1a17;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      }
+
+      #game-container {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      /* Loading Overlay */
+      #loading-screen {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, #1b352e 0%, #081412 100%);
+        color: #e5ece9;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.6s ease;
+      }
+
+      #loading-screen h1 {
+        font-size: 28px;
+        letter-spacing: 2px;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        color: #8adea8;
+      }
+
+      #loading-screen p {
+        font-size: 14px;
+        color: #a4c4b8;
+        margin-bottom: 24px;
+      }
+
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 4px solid rgba(255, 255, 255, 0.15);
+        border-top-color: #55c786;
+        border-radius: 50%;
+        animation: spin 1s infinite linear;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+
+      /* HUD */
+      #croc-hud {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        right: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        pointer-events: none;
+        z-index: 100;
+      }
+
+      .hud-panel {
+        background: rgba(14, 25, 21, 0.8);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(138, 222, 168, 0.25);
+        border-radius: 8px;
+        padding: 10px 14px;
+        display: flex;
+        gap: 16px;
+        color: #e5ece9;
+        font-size: 13px;
+        font-weight: 500;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      .hud-row {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .hud-label {
+        color: #8da49b;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+      }
+
+      .hud-val {
+        color: #ffffff;
+        font-weight: 600;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .state-tag {
+        padding: 2px 8px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        font-size: 11px;
+        font-weight: bold;
+      }
+      .state-land { background: #5c4827; color: #f5deb3; }
+      .state-wading { background: #2f5a54; color: #a4f4e7; }
+      .state-surface { background: #1c5270; color: #7fe0ff; }
+      .state-submerged { background: #0c2d3a; color: #4ae0c0; border: 1px solid #4ae0c0; }
+
+      .hud-controls {
+        pointer-events: auto;
+      }
+
+      #quality-selector {
+        background: rgba(14, 25, 21, 0.85);
+        color: #d1e2db;
+        border: 1px solid rgba(138, 222, 168, 0.3);
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 12px;
+        cursor: pointer;
+        outline: none;
+      }
+
+      /* Desktop Instructions Overlay */
+      #croc-instructions {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .instruct-card {
+        background: rgba(14, 25, 21, 0.78);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(138, 222, 168, 0.2);
+        border-radius: 8px;
+        padding: 12px 16px;
+        color: #d7e4de;
+        font-size: 12px;
+        max-width: 320px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+      }
+
+      .instruct-card h3 {
+        margin-bottom: 8px;
+        color: #8adea8;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .instruct-card ul {
+        list-style: none;
+        margin-bottom: 8px;
+        line-height: 1.6;
+      }
+
+      .instruct-card .hint {
+        color: #9cb8ad;
+        font-size: 11px;
+        font-style: italic;
+      }
+
+      /* Touch Controls (Hidden by default on desktop) */
+      #touch-joystick {
+        display: none;
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        z-index: 200;
+        touch-action: none;
+      }
+
+      .joystick-knob {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(138, 222, 168, 0.6);
+        pointer-events: none;
+      }
+
+      #touch-action-buttons {
+        display: none;
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 200;
+      }
+
+      .touch-btn {
+        width: 74px;
+        height: 54px;
+        border-radius: 12px;
+        background: rgba(14, 25, 21, 0.85);
+        border: 2px solid rgba(138, 222, 168, 0.4);
+        color: #e5ece9;
+        font-size: 11px;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        touch-action: none;
+      }
+      .touch-btn:active {
+        background: rgba(85, 199, 134, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-screen">
+      <h1>🐊 Saltwater Crocodile</h1>
+      <p>Loading mangrove swamp environment & models...</p>
+      <div class="spinner"></div>
+    </div>
+
+    <div id="game-container"></div>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
