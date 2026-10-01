@@ -3,16 +3,16 @@ dist
 .DS_Store
 *.local
 # Exclude original massive uncompressed archives and root test exports from git
-cc0__red_mangrove_rhizophora_mucronata.glb
-crocodile_high_quality.glb
-water_buffalo
-Ultimate Animated Animals - July 2021
-dark_sleeper_fish
-rice_fish
-coast_sand
-dead_tree_trunk
-fern_02
-mangrove_tree.glb
-mangrove_tree_optimized.glb
-red_mangrove_optimized.glb
-crocodile_optimized.glb
+/cc0__red_mangrove_rhizophora_mucronata.glb
+/crocodile_high_quality.glb
+/water_buffalo
+/Ultimate Animated Animals - July 2021
+/dark_sleeper_fish
+/rice_fish
+/coast_sand
+/dead_tree_trunk
+/fern_02
+/mangrove_tree.glb
+/mangrove_tree_optimized.glb
+/red_mangrove_optimized.glb
+/crocodile_optimized.glb

@@ -51,10 +51,10 @@ export class GameEngine {
 
     // 1. Scene setup
     this.scene = new THREE.Scene();
-    this.surfaceFog = new THREE.FogExp2(0x8fae9d, 0.012); // Warm humid tropical haze
-    this.underwaterFog = new THREE.FogExp2(0x0c2522, 0.075); // Deep brackish murky water fog
+    this.surfaceFog = new THREE.FogExp2(0xa2bead, 0.006); // Soft warm tropical swamp mist
+    this.underwaterFog = new THREE.FogExp2(0x0c2522, 0.065); // Deep brackish murky water fog
     this.scene.fog = this.surfaceFog;
-    this.scene.background = new THREE.Color(0x8fae9d);
+    this.scene.background = new THREE.Color(0xa2bead);
 
     // 2. Renderer setup
     this.renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
@@ -93,9 +93,12 @@ export class GameEngine {
 
     // 5. Authoritative Player Character (Crocodile)
     this.crocodile = new CrocodileController(this.terrain, { waterLevel: 0.0 });
-    // Spawn on muddy shoreline near river bank
-    this.crocodile.position.set(17, 0.5, 0);
-    this.crocodile.heading = Math.PI * 0.9;
+    // Spawn on muddy shoreline bank facing toward the river channel
+    const spawnX = -14;
+    const spawnZ = 10;
+    const spawnH = this.terrain.getHeightAt(spawnX, spawnZ);
+    this.crocodile.position.set(spawnX, spawnH + 0.2, spawnZ);
+    this.crocodile.heading = -Math.PI / 2; // Facing towards river center (+X)
     this.scene.add(this.crocodile.group);
 
     // 6. Camera

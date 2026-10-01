@@ -65,6 +65,9 @@ export class CrocodileController {
     model.position.z = -center.z;
     model.position.y = -updatedBox.min.y; // base rests on local Y=0
 
+    // Authoritative orientation: in model coords, snout faces +Z. Rotate 180deg so snout faces forward (-Z)
+    model.rotation.y = Math.PI;
+
     this.modelPivot.add(model);
   }
 
